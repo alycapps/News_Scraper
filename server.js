@@ -1,4 +1,4 @@
-// DEPENDENCIES
+// DEPENDENCIES ---
 //for setting up server
 var express = require("express");
 //noSQl database
@@ -8,6 +8,7 @@ var logger = require("morgan");
 //for scraping website
 var axios = require("axios");
 var cheerio = require("cheerio");
+//----
 
 //create express server
 var app = express();
@@ -32,11 +33,39 @@ mongoose.connect(MONGODB_URI);
 // Connect to Mongoose
 mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 
-//ROUTES
+//scraping route for npr food
+app.get("/scrape", function(req, res) {
+  //grab the html body of npr
+  axios.get("https://www.npr.org/sections/food/").then(function(response) {
 
+    // Load the Response into cheerio and save it to a variable
+    var $ = cheerio.load(response.data);
 
+    var articles = [];
 
+    $("h2.title").each(function(i, element) {
+      // Save the text of the element in a "title" variable
+      var title = $(element).children().text();
+      // In the currently selected element, look at its child elements (i.e., its a-tags),
+      // then save the values for any "href" attributes that the child elements may have
+      var link = $(element).children().attr("href");
+      var summary = $(element).parent().children().text();
+    // Save these results in an object that we'll push into the results array we defined earlier
+      articles.push({
+        title: title,
+        link: link,
+        summary: summary
+      });
+    });
+    // Log the results once you've looped through each of the elements found with cheerio
+    console.log(articles);
+    res.send("articles found :)")
+  });
+});
 
+//ROUTES----
+
+//----
 
 //start server listening on port 3000
 app.listen(3000, function() {
