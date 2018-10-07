@@ -8,12 +8,14 @@ var logger = require("morgan");
 //for scraping website
 var axios = require("axios");
 var cheerio = require("cheerio");
+// Set Handlebars.
+var exphbs = require("express-handlebars");
 //----
 
 //create express server
 var app = express();
 
-//automatic logging
+//automatic console logging
 app.use(logger("dev"));
 
 // Parse request body as JSON
@@ -32,6 +34,16 @@ mongoose.connect(MONGODB_URI);
 
 // Connect to Mongoose
 mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+
+//HANDLEBARS ---
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
+
+// // Import routes and give the server access to them.
+// var routes = require("./controllers/routecontroller.js");
+
+// app.use(routes);
+//---
 
 //scraping route for npr food
 app.get("/scrape", function(req, res) {
@@ -64,6 +76,18 @@ app.get("/scrape", function(req, res) {
 });
 
 //ROUTES----
+// Route for getting all Articles
+app.get("/articles", function(req, res) {
+  db.Article.find({})
+    .then(function(articles) {
+      res.json(articles);
+    })
+    //error handling
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
 
 //----
 
