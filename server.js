@@ -52,31 +52,26 @@ app.get("/scrape", function(req, res) {
 
     // Load the Response into cheerio and save it to a variable
     var $ = cheerio.load(response.data);
-
     var articles = [];
 
     $("h2.title").each(function(i, element) {
-      // Save the text of the element in a "title" variable
       var title = $(element).children().text();
-      // In the currently selected element, look at its child elements (i.e., its a-tags),
-      // then save the values for any "href" attributes that the child elements may have
       var link = $(element).children().attr("href");
       var summary = $(element).parent().children().text();
-    // Save these results in an object that we'll push into the results array we defined earlier
       articles.push({
         title: title,
         link: link,
         summary: summary
       });
     });
-    // Log the results once you've looped through each of the elements found with cheerio
+
     console.log(articles);
     res.send("articles found :)")
   });
 });
 
 //ROUTES----
-// Route for getting all Articles
+// Route for all Articles
 app.get("/articles", function(req, res) {
   db.Article.find({})
     .then(function(articles) {
@@ -87,8 +82,35 @@ app.get("/articles", function(req, res) {
       res.json(err);
     });
 });
+// Route for specific Article and note
+app.get("/articles/:id", function(req, res) {
+  db.Article.findOne({_id: req.params.id})
+    .populate("note")
+    .then(function(articles) {
+      res.json(articles);
+    })
+    //error handling
+    .catch(function(err) {
+      res.json(err);
+    });
+});
 
-
+// Route for saving & updating the Article's note
+app.post("/articles/:id", function(req, res) {
+  db.Note.create(req.body)
+    .then(function(newNote) {
+      return db.Article.findOneAndUpdate(
+        {_id: req.params.id}, 
+        {$push: { note: newNote._id }}, 
+        {new: true });
+    })
+    .then(function(article) {
+      res.json(article);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
 //----
 
 //start server listening on port 3000
