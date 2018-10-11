@@ -1,1 +1,30 @@
+{{!-- Header --}}
+<div id="header">
+    <br>
+    <h1>News about Food!</h1>
+    <br>
+</div>
 
+
+<div class="container">
+    {{!-- Row 1 Articles --}}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 toEat">
+            <ul>
+                {{#each articles}}
+                        <li>
+                            {{this.title}}.{{this.articles}}
+                        </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <br>
+</div>
+
+{{!-- Javascript --}}
+<script type="text/javascript">
+   
+</script>
