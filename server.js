@@ -46,12 +46,22 @@ app.set("view engine", "handlebars");
 //used for handlebars
 // var router = express.Router();
 app.get("/", function(req, res) {
-	res.render("index", articles);
+	db.Article.find({})
+		.then(function(art) {
+			var articlesObj = {
+				articles: art
+			}
+			res.render("index", articlesObj);
+		})
+	//error handling
+		.catch(function(err) {
+			res.json(err);
+		});
 });
 //---
 
 //scraping route for npr food
-// var articles = [];
+// var result = [];
 app.get("/scrape", function(req, res) {
 	//grab the html body of npr
 	axios.get("https://www.npr.org/sections/food/").then(function(response) {

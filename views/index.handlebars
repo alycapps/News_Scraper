@@ -14,7 +14,10 @@
             <ul>
                 {{#each articles}}
                         <li>
-                            {{this.title}}.{{this.articles}}
+                            <a href={{this.link}}.{{this.articles}}>{{this.title}}.{{this.articles}}</a>
+                        </li>
+                        <li>
+                            {{this.summary}}.{{this.articles}}
                         </li>
                 {{/each}}
             </ul>
