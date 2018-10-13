@@ -31,7 +31,7 @@ module.exports = {
 						return res.json(err);
 					});
 			});
-			res.send("articles found :)")
+			res.send("articles found :)");
 		});
 	}
 }

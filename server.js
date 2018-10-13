@@ -10,9 +10,9 @@ var exphbs = require("express-handlebars");
 //----
 
 //Import routes
-var viewRoutes = require("./routes/view/index")
-var scrapeRoute = require("./routes/api/scrape")
-var articleRoutes = require("./routes/api/articles")
+var viewRoutes = require("./routes/view/index");
+var scrapeRoute = require("./routes/api/scrape");
+var articleRoutes = require("./routes/api/articles");
 
 //create express server
 var app = express();
@@ -31,9 +31,10 @@ app.use(express.static("public"));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-//HANDLEBARS 
+//HANDLEBARS ---
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+// ---
 
 //ROUTES ----
 //used for handlebars
@@ -43,6 +44,8 @@ app.get("/saved", viewRoutes.fetchSaved);
 app.get("/scrape", scrapeRoute.scrape);
 // Route for all Articles
 app.get("/articles", articleRoutes.all);
+// Route for deleting all not saved Articles
+app.get("/articles/notsaved", articleRoutes.all);
 // Route for specific Article and note
 app.get("/articles/:id", articleRoutes.findOne);
 // Route for updating save value

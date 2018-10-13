@@ -13,6 +13,18 @@ module.exports = {
 			});
 	},
 
+	// Route for deleting all not saved Articles
+	deleteAll: function(req, res) {
+		db.Article.remove(
+		).then(function(articles) {
+			res.json(articles);
+		})
+		//error handling
+			.catch(function(err) {
+				res.json(err);
+			});
+	},
+
 	// Route for specific Article and note
 	findOne: function(req, res) {
 		db.Article.findOne({_id: req.params.id})

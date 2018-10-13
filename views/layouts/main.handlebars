@@ -17,9 +17,14 @@
     <div id="header">
         <br>
         <h1>News about Food!</h1>
-        <a href="/">Home</a>
+        <a class="homelink" href="/">Home</a> 
         |
-        <a href="/saved">Saved Articles</a>
+        <a class="savedlink" href="/saved"> Saved Articles</a>
+        <br>
+        <br>
+            <button type="button" class="btn btn-secondary scrapebtn">Scrape</button>
+            <button type="button" class="btn btn-secondary clearbtn">Clear Articles</button>
+        <br>
         <br>
     </div>
     {{{body}}}
@@ -31,3 +36,36 @@
     </div>
 </body>
 </html>
+
+
+{{!-- Javascript --}}
+<script type="text/javascript">
+
+// When you click the scrapebtn
+$(document).on("click", ".scrapebtn", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape",
+  }).then(function(data) {
+        console.log(data);
+        location.reload();
+    });
+});
+
+$(document).on("click", ".clearbtn", function() {
+  // Grab the id associated with the article from the submit button
+  var thisId = $(this).attr("data-id");
+  // Run a POST request to change the saved value
+  console.log(thisId);
+  $.ajax({
+    method: "GET",
+    url: "/articles/notsaved"
+    {{!-- data: {
+      saved: true
+    } --}}
+  }).then(function(data) {
+      console.log(data);
+        location.reload();
+    });
+});
+</script>
