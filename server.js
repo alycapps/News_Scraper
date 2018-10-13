@@ -38,13 +38,15 @@ app.set("view engine", "handlebars");
 //ROUTES ----
 //used for handlebars
 app.get("/", viewRoutes.fetchAll);
-app.get("/saved", viewRoutes.fetchAll);
+app.get("/saved", viewRoutes.fetchSaved);
 //scraping route for NPR food
 app.get("/scrape", scrapeRoute.scrape);
 // Route for all Articles
 app.get("/articles", articleRoutes.all);
 // Route for specific Article and note
 app.get("/articles/:id", articleRoutes.findOne);
+// Route for updating save value
+app.post("/articles/:id", articleRoutes.updateSave);
 // Route for saving & updating the Article's note
 app.post("/articles/:id", articleRoutes.postOne);
 //----

@@ -15,6 +15,10 @@ var Article = new Schema({
 		type: String,
 		required: true
 	},
+	saved: {
+		type: Boolean,
+		default: false
+	},
 	// will be used to connect to notes
 	note: {
 		type: Schema.Types.ObjectId,

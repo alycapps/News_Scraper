@@ -26,6 +26,23 @@ module.exports = {
 			});
 	},
 
+	// Route for updating save value
+	updateSave: function(req, res) {
+		db.Article.update(req.body)
+			.then(function(newNote) {
+				return db.Article.findOneAndUpdate(
+					{_id: req.params.id}, 
+					{$set: { saved: true }} 
+				);
+			})
+			.then(function(article) {
+				res.json(article);
+			})
+			.catch(function(err) {
+				res.json(err);
+			});
+	},
+
 	// Route for saving & updating the Article's note
 	postOne: function(req, res) {
 		db.Note.create(req.body)
