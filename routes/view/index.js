@@ -18,7 +18,7 @@ module.exports = {
 			});
 	},
 	fetchSaved:function(req, res) {
-		db.Article.find({})
+		db.Article.find({"saved":"true"})
 			.then(function(art) {
 				var articlesObj = {
 					articles: art

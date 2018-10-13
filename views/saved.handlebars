@@ -2,6 +2,7 @@
 <div class="container">
     {{!-- Row 1 Articles --}}
     {{#each articles}}
+      {{#if saved}}
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8 toEat">
@@ -22,6 +23,7 @@
             <div class="col-md-2"></div>
         </div>
         <br>
+      {{/if}}
     {{/each}}
 </div>
 <br>
