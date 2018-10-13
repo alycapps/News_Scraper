@@ -38,6 +38,7 @@ app.set("view engine", "handlebars");
 //ROUTES ----
 //used for handlebars
 app.get("/", viewRoutes.fetchAll);
+app.get("/saved", viewRoutes.fetchAll);
 //scraping route for NPR food
 app.get("/scrape", scrapeRoute.scrape);
 // Route for all Articles
