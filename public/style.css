@@ -1,0 +1,22 @@
+body {
+  background: #e7d7a9;
+}
+
+.titleloc {
+  color:#3d3241;
+}
+
+#header {
+  text-align: center;
+  background: #7a3e48;
+  color: #e28743;
+}
+
+.card {
+  color: #b95836;
+}
+
+#footer {
+  background: #e28743;
+  text-align: right;
+}

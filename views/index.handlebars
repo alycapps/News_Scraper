@@ -1,31 +1,29 @@
-{{!-- Header --}}
-<div id="header">
-    <br>
-    <h1>News about Food!</h1>
-    <br>
-</div>
-
-
+<br>
 <div class="container">
     {{!-- Row 1 Articles --}}
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 toEat">
-            <ul>
-                {{#each articles}}
-                        <li>
-                            <a href={{this.link}}.{{this.articles}}>{{this.title}}.{{this.articles}}</a>
-                        </li>
-                        <li>
-                            {{this.summary}}.{{this.articles}}
-                        </li>
-                {{/each}}
-            </ul>
+    {{#each articles}}
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 toEat">
+                <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a class="titleloc" href={{this.link}}.{{this.articles}}>{{this.title}}.{{this.articles}}</a>
+                    </h5>
+                    {{!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
+                    <p class="card-text">{{this.summary}}.{{this.articles}}</p>
+                    {{!-- <a href="#" class="card-link">Card link</a> --}}
+                    {{!-- <a href="#" class="card-link">Another link</a> --}}
+                </div>
+                </div>        
+                
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
-    </div>
-    <br>
+        <br>
+    {{/each}}
 </div>
+<br>
 
 {{!-- Javascript --}}
 <script type="text/javascript">
