@@ -23,7 +23,7 @@ module.exports = {
 				var articlesObj = {
 					articles: art
 				};
-				res.render("index", articlesObj);
+				res.render("saved", articlesObj);
 			})
 		//error handling
 			.catch(function(err) {

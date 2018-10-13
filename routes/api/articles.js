@@ -28,11 +28,13 @@ module.exports = {
 
 	// Route for updating save value
 	updateSave: function(req, res) {
+		var bod = req.body;
+		console.log(bod);
 		db.Article.update(req.body)
-			.then(function(newNote) {
+			.then(function(data) {
 				return db.Article.findOneAndUpdate(
 					{_id: req.params.id}, 
-					{$set: { saved: true }} 
+					{$set: { saved: bod.saved }} 
 				);
 			})
 			.then(function(article) {
