@@ -11,12 +11,13 @@
                     <h5 class="card-title">
                         <a class="titleloc" href={{this.link}}>{{this.title}}</a>
                     </h5>
-                    {{!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
                     <p class="card-text">{{this.summary}}</p>
-                    {{!-- <a href="#" class="card-link">Card link</a> --}}
-                    {{!-- <a href="#" class="card-link">Another link</a> --}}
-                    <button type="button" class="btn btn-secondary deletebtn" data-id={{this._id}}>Delete</button>
-                    <button type="button" class="btn btn-secondary addnote" data-id={{this._id}}>Add Note</button>
+                    <button type="button" class="btn btn-secondary deletebtn" data-id={{this._id}} >
+                      Delete
+                    </button>                    
+                    <button type="button" class="btn btn-secondary viewnote" data-id={{this._id}} data-toggle="modal" data-target="#modal_{{this._id}}">
+                      View Notes
+                      </button>
                 </div>
                 </div>        
                 
@@ -24,39 +25,76 @@
             <div class="col-md-2"></div>
         </div>
         <br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal_{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
       {{/if}}
     {{/each}}
 </div>
 <br>
 
+
+
+
+
+
 {{!-- Javascript --}}
 <script type="text/javascript">
 
-// When you click the savenote button
-$(document).on("click", ".deletebtn", function() {
-  // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
-  // Run a POST request to change the saved value
-  console.log(thisId);
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      saved: false
-    }
-  }).then(function(data) {
-      console.log(data);
-      location.reload();
-    });
-});
+  // When you click the savenote button
+  $(document).on("click", ".deletebtn", function() {
+    // Grab the id associated with the article from the submit button
+    var thisId = $(this).attr("data-id");
+    // Run a POST request to change the saved value
+    console.log(thisId);
+    $.ajax({
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: {
+        saved: false
+      }
+    }).then(function(data) {
+        console.log(data);
+        location.reload();
+      });
+  });
 
 
-
-
+  {{!-- //call to display the modal
+  $(".viewnote").on("click", function(event) {
+    event.preventDefault();
+    $('#myModal').modal("show");
+    function displayModal() {
+        $('.modal-title').html("Notes");
+        $('.modal-body').html("description");
+    } 
+    displayModal();
+  });  --}}
 
 
 // Whenever someone clicks a title tag
-$(document).on("click", "h5", function() {
+$(".addnote").on("click", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -90,7 +128,7 @@ $(document).on("click", "h5", function() {
 });
 
 // When you click the savenote button
-$(document).on("click", "#savenote", function() {
+$(".addnote").on("click", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
