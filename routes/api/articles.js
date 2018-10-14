@@ -49,6 +49,8 @@ module.exports = {
 			.populate("note")
 			.then(function(articles) {
 				res.json(articles);
+				console.log(articles);
+				console.log("^here");
 			})
 		//error handling
 			.catch(function(err) {
@@ -62,8 +64,8 @@ module.exports = {
 			.then(function(newNote) {
 				return db.Article.findOneAndUpdate(
 					{_id: req.params.id}, 
-					{$push: { note: newNote._id }}, 
-					{new: true });
+					{$set: { note: newNote._id }}
+					);
 			})
 			.then(function(article) {
 				res.json(article);

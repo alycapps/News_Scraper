@@ -38,9 +38,7 @@
               </div>
               <div class="modal-body">
                 <div id="notes">
-                  {{!-- {{this.note}} --}}
                 </div>
-                
                 <form>
                   <b>Add a Note</b><br>
                   Title:<br>
@@ -131,8 +129,8 @@ $(document).on("click", ".addnote", function() {
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val() = "";
-  $("#bodyinput").val() = "";
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
   location.reload();
 });
 
