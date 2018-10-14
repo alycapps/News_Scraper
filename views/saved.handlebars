@@ -38,7 +38,7 @@
               </div>
               <div class="modal-body">
                 <div id="notes">
-                  {{this.note}}
+                  {{!-- {{this.note}} --}}
                 </div>
                 
                 <form>
@@ -85,10 +85,12 @@
       });
   });
 
-// Whenever someone clicks addnote button
+// Whenever someone clicks viewnote button
 $(document).on("click", ".viewnote", function() {
+  
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
+  $("#notes").empty(); 
 
   // Now make an ajax call for the Article
   $.ajax({
@@ -97,16 +99,8 @@ $(document).on("click", ".viewnote", function() {
   })
     // With that done, add the note information to the page
     .then(function(data) {
-      console.log(data);
-      // The title of the article
-   
       // If there's a note in the article
       if (data.note) {
-        // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
-
       $("#notes").append("<h2>" + data.note.title + "</h2>");
       $("#notes").append("<p>" + data.note.body + "</p>");
       }
@@ -117,15 +111,15 @@ $(document).on("click", ".viewnote", function() {
 $(document).on("click", ".addnote", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
+  var noteTitle = $("#titleinput").val();
+  var bodyTitle = $("#bodyinput").val();
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
+      title: noteTitle,
+      body: bodyTitle
     }
   })
     // With that done
@@ -137,8 +131,9 @@ $(document).on("click", ".addnote", function() {
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
+  $("#titleinput").val() = "";
+  $("#bodyinput").val() = "";
+  location.reload();
 });
 
 </script>
