@@ -49,7 +49,7 @@ app.post("/articles", articleRoutes.deleteAll);
 // Route for specific Article and note
 app.get("/articles/:id", articleRoutes.findOne);
 // Route for updating save value
-app.post("/articles/:id", articleRoutes.updateSave);
+app.post("/articles/saved/:id", articleRoutes.updateSave);
 // Route for saving & updating the Article's note
 app.post("/articles/:id", articleRoutes.postOne);
 //----

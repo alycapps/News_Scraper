@@ -25,23 +25,9 @@ module.exports = {
 			});
 	},
 
-	// Route for specific Article and note
-	findOne: function(req, res) {
-		db.Article.findOne({_id: req.params.id})
-			.populate("note")
-			.then(function(articles) {
-				res.json(articles);
-			})
-		//error handling
-			.catch(function(err) {
-				res.json(err);
-			});
-	},
-
 	// Route for updating save value
 	updateSave: function(req, res) {
 		var bod = req.body;
-		console.log(bod);
 		db.Article.update(req.body)
 			.then(function(data) {
 				return db.Article.findOneAndUpdate(
@@ -52,6 +38,19 @@ module.exports = {
 			.then(function(article) {
 				res.json(article);
 			})
+			.catch(function(err) {
+				res.json(err);
+			});
+	},
+
+	// Route for specific Article and note
+	findOne: function(req, res) {
+		db.Article.findOne({_id: req.params.id})
+			.populate("note")
+			.then(function(articles) {
+				res.json(articles);
+			})
+		//error handling
 			.catch(function(err) {
 				res.json(err);
 			});

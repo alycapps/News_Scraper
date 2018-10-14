@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Mongoose Article constructor
-var Article = new Schema({
+var ArticleSchema = new Schema({
 	title: {
 		type: String,
 		required: true,
@@ -28,7 +28,7 @@ var Article = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Article = mongoose.model("Article", Article);
+var Article = mongoose.model("Article", ArticleSchema);
 
 // Export the Article model
 module.exports = Article;

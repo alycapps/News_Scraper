@@ -31,15 +31,14 @@ $(document).on("click", ".savebtn", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
   // Run a POST request to change the saved value
-  console.log(thisId);
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "/articles/saved/" + thisId,
     data: {
       saved: true
     }
   }).then(function(data) {
-      console.log(data);
+      
     });
 });
 
