@@ -21,7 +21,10 @@ var app = express();
 app.use(logger("dev"));
 
 // Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
+//for deployment
+app.use(express.urlencoded());
+//for development
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Use static folder
