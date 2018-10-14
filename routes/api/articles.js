@@ -13,7 +13,7 @@ module.exports = {
 			});
 	},
 
-	// Route for deleting all not saved Articles
+	// Route for deleting all Articles
 	deleteAll: function(req, res) {
 		db.Article.remove(
 		).then(function(articles) {

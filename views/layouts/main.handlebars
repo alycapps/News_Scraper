@@ -43,6 +43,7 @@
 
 // When you click the scrapebtn
 $(document).on("click", ".scrapebtn", function() {
+    //scrape articles
   $.ajax({
     method: "GET",
     url: "/scrape",
@@ -52,17 +53,12 @@ $(document).on("click", ".scrapebtn", function() {
     });
 });
 
+// When you click the clearbtn
 $(document).on("click", ".clearbtn", function() {
-  // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
-  // Run a POST request to change the saved value
-  console.log(thisId);
+    //delete all articles
   $.ajax({
-    method: "GET",
-    url: "/articles/notsaved"
-    {{!-- data: {
-      saved: true
-    } --}}
+    method: "POST",
+    url: "/articles"
   }).then(function(data) {
       console.log(data);
         location.reload();

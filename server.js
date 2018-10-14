@@ -44,8 +44,8 @@ app.get("/saved", viewRoutes.fetchSaved);
 app.get("/scrape", scrapeRoute.scrape);
 // Route for all Articles
 app.get("/articles", articleRoutes.all);
-// Route for deleting all not saved Articles
-app.get("/articles/notsaved", articleRoutes.all);
+// Route for deleting all Articles
+app.post("/articles", articleRoutes.deleteAll);
 // Route for specific Article and note
 app.get("/articles/:id", articleRoutes.findOne);
 // Route for updating save value
