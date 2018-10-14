@@ -78,9 +78,8 @@
         saved: false
       }
     }).then(function(data) {
-        console.log(data);
         location.reload();
-      });
+    });
   });
 
 // Whenever someone clicks viewnote button
@@ -122,9 +121,6 @@ $(document).on("click", ".addnote", function() {
   })
     // With that done
     .then(function(data) {
-      // Log the response
-      console.log(data);
-      console.log("^notes")
 
     });
 
