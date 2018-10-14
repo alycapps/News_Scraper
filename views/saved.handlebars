@@ -31,7 +31,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Notes for {{this.title}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Note about {{this.title}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -40,7 +40,9 @@
                 <div id="notes">
                   {{this.note}}
                 </div>
+                
                 <form>
+                  <b>Add a Note</b><br>
                   Title:<br>
                   <input type="text" id="titleinput" style="width:350px;"><br>
                   Note:<br>
@@ -51,8 +53,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                   Close
                 </button>
-                <button type="button" class="btn btn-primary addnote" data-id={{this._id}}>
-                  AddNote
+                <button type="button" class="btn btn-secondary addnote" data-id={{this._id}}>
+                  Add Note
                 </button>
               </div>
             </div>
@@ -106,7 +108,7 @@ $(document).on("click", ".viewnote", function() {
         $("#bodyinput").val(data.note.body);
 
       $("#notes").append("<h2>" + data.note.title + "</h2>");
-      $("#notes").append("<h2>" + data.note.body + "</h2>");
+      $("#notes").append("<p>" + data.note.body + "</p>");
       }
     });
 });
