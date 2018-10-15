@@ -22,7 +22,7 @@ app.use(logger("dev"));
 
 // Parse request body as JSON
 //for deployment
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
 //for development
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -32,7 +32,10 @@ app.use(express.static("public"));
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+//for deployment
+mongoose.connect(MONGODB_URI);
+// for development
+// mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //HANDLEBARS ---
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
